@@ -71,12 +71,12 @@ public class MinefanaSponge implements AnalyticsPlugin {
     public void registerTasks() {
         Task.builder()
                 .interval(1, TimeUnit.SECONDS)
-                .execute(new TpsCollector(core.getConnector(), Sponge.getServer()::getTicksPerSecond))
+                .execute(new TpsCollector(core.getConnector(), core.getServerTag(), Sponge.getServer()::getTicksPerSecond))
                 .submit(this);
 
         Task.builder()
                 .interval(2, TimeUnit.SECONDS)
-                .execute(new PingCollector(core.getConnector(), () -> Sponge.getServer().getOnlinePlayers().stream()
+                .execute(new PingCollector(core.getConnector(), core.getServerTag(), () -> Sponge.getServer().getOnlinePlayers().stream()
                         .mapToInt(player -> player.getConnection().getLatency())
                         .average().orElse(0)))
                 .submit(this);

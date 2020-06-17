@@ -9,9 +9,8 @@ public class TpsCollector extends AbstractCollector {
 
     private final DoubleSupplier collector;
 
-    public TpsCollector(InfluxConnector connector, DoubleSupplier collector) {
-        super(connector);
-
+    public TpsCollector(InfluxConnector connector, String serverTag, DoubleSupplier collector) {
+        super(connector, serverTag);
         this.collector = collector;
     }
 

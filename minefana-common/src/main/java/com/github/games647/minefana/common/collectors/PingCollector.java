@@ -9,9 +9,8 @@ public class PingCollector extends AbstractCollector {
 
     private final DoubleSupplier collector;
 
-    public PingCollector(InfluxConnector connector, DoubleSupplier collector) {
-        super(connector);
-
+    public PingCollector(InfluxConnector connector, String serverTag, DoubleSupplier collector) {
+        super(connector, serverTag);
         this.collector = collector;
     }
 

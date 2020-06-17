@@ -1,5 +1,7 @@
 package com.github.games647.minefana.common.collectors;
 
+import com.github.games647.minefana.common.AnalyticsCore;
+import com.github.games647.minefana.common.AnalyticsPlugin;
 import com.github.games647.minefana.common.AnalyticsType;
 import com.github.games647.minefana.common.InfluxConnector;
 
@@ -11,14 +13,17 @@ import org.influxdb.dto.Point;
 public abstract class AbstractCollector implements Runnable {
 
     protected final InfluxConnector connector;
+    protected final String serverTag;
 
-    public AbstractCollector(InfluxConnector connector) {
+    public AbstractCollector(InfluxConnector connector, String serverTag) {
         this.connector = connector;
+        this.serverTag = serverTag;
     }
 
     protected void send(Point.Builder point) {
         connector.send(point
                 .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                .tag("server", serverTag)
                 .build());
     }
 

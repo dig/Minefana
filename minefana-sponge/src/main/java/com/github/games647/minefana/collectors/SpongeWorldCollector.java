@@ -13,8 +13,8 @@ import org.spongepowered.api.world.World;
 public class SpongeWorldCollector extends WorldCollector<World> {
 
     @Inject
-    SpongeWorldCollector(InfluxConnector connector) {
-        super(connector);
+    SpongeWorldCollector(InfluxConnector connector, String serverTag) {
+        super(connector, serverTag);
     }
 
     @Override

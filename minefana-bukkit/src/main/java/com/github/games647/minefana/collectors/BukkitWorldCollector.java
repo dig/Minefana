@@ -12,8 +12,8 @@ import org.bukkit.World;
 
 public class BukkitWorldCollector extends WorldCollector<World> {
 
-    public BukkitWorldCollector(InfluxConnector connector) {
-        super(connector);
+    public BukkitWorldCollector(InfluxConnector connector, String serverTag) {
+        super(connector, serverTag);
     }
 
     @Override

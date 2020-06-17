@@ -44,9 +44,12 @@ public class AnalyticsCore {
     private InfluxConnector connector;
     private Reader geoReader;
 
+    private String serverTag;
+
     public AnalyticsCore(AnalyticsPlugin plugin, Logger logger) {
         this.plugin = plugin;
         this.logger = logger;
+        this.serverTag = "default";
     }
 
     public boolean initialize() {
@@ -75,6 +78,8 @@ public class AnalyticsCore {
             if (config.getBoolean("geo-ip")) {
                 loadGeo();
             }
+
+            serverTag = config.getString("server-tag");
 
             connector = new InfluxConnector(dbUrl, dbUser, dbPass, dbName);
             connector.init();
@@ -175,6 +180,10 @@ public class AnalyticsCore {
 
     public InfluxConnector getConnector() {
         return connector;
+    }
+
+    public String getServerTag() {
+        return serverTag;
     }
 
     public void close() {

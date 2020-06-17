@@ -47,17 +47,17 @@ public class MinefanaBukkit extends JavaPlugin implements AnalyticsPlugin {
         TicksPerSecondTask ticksTask = new TicksPerSecondTask();
         scheduler.runTaskTimer(this, ticksTask, 60L, 1L);
 
-        Runnable tpsCollector = new TpsCollector(core.getConnector(), ticksTask::getLastTicks);
+        Runnable tpsCollector = new TpsCollector(core.getConnector(), core.getServerTag(), ticksTask::getLastTicks);
         scheduler.runTaskTimer(this, tpsCollector, 20L, 20L);
 
-        Runnable pingTask = new PingCollector(core.getConnector(), () -> Bukkit.getOnlinePlayers()
+        Runnable pingTask = new PingCollector(core.getConnector(), core.getServerTag(), () -> Bukkit.getOnlinePlayers()
                 .stream()
                 .mapToInt(BukkitUtil::getReflectionPing)
                 .average()
                 .orElse(0));
         scheduler.runTaskTimer(this, pingTask, 40L, 40L);
 
-        scheduler.runTaskTimer(this, new BukkitWorldCollector(core.getConnector()), 5 * 60 * 20L, 5 * 60 * 20L);
+        scheduler.runTaskTimer(this, new BukkitWorldCollector(core.getConnector(), core.getServerTag()), 5 * 60 * 20L, 5 * 60 * 20L);
 
         playerCollector = new BukkitPlayerCollector(core);
         scheduler.runTaskTimer(this, playerCollector, 15 * 60 * 20L, 15 * 60 * 20L);

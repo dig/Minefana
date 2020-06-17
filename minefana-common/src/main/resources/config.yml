@@ -6,6 +6,9 @@ db_name: 'minecraft_stats'
 db_user: 'username'
 db_pass: 'pass'
 
+# Tag for this server
+server-tag: 'default'
+
 # Should we try to geo-locate the IP-address using the MaxMind database?
 # If this is enabled the database will be downloaded after every server startup.
 geo-ip: false

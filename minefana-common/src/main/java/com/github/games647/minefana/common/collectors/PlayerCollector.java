@@ -24,7 +24,7 @@ public abstract class PlayerCollector<P, T extends AnalyticsPlayer> extends Abst
     private final AnalyticsCore core;
 
     public PlayerCollector(AnalyticsCore core) {
-        super(core.getConnector());
+        super(core.getConnector(), core.getServerTag());
         this.core = core;
     }
 

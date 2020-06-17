@@ -9,8 +9,8 @@ import org.influxdb.dto.Point;
 
 public abstract class WorldCollector<W> extends AbstractCollector {
 
-    public WorldCollector(InfluxConnector connector) {
-        super(connector);
+    public WorldCollector(InfluxConnector connector, String serverTag) {
+        super(connector, serverTag);
     }
 
     @Override
